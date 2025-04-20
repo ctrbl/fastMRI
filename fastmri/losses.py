@@ -62,3 +62,44 @@ class SSIMLoss(nn.Module):
             return 1 - S.mean()
         else:
             return 1 - S
+
+
+class CenterWeightedL1Loss(nn.Module):
+    
+    def __init__(self,center_frac = 0.25,center_weight =3.0):
+        """
+        Args:
+            center_frac: Fraction (0 to 1) of the image height/width to treat as the "center" region.
+            center_weight: Weight multiplier for the center region.
+        """
+        
+        super().__init__()
+        self.center_frac = center_frac
+        self.center_weight = center_weight
+        
+    
+    def forward(self,input,target):
+        assert input.shape == target.shape, "Shape mismatch between input and target"
+        #print(input.shape)
+        b, h, w = input.shape
+
+        # Create weighting mask
+        weight_mask = torch.ones_like(input)
+
+        h_start = int(h * (0.5 - self.center_frac / 2))
+        h_end = int(h * (0.5 + self.center_frac / 2))
+        w_start = int(w * (0.5 - self.center_frac / 2))
+        w_end = int(w * (0.5 + self.center_frac / 2))
+
+        weight_mask[:, h_start:h_end, w_start:w_end] *= self.center_weight
+
+        # Compute weighted L1 loss
+        loss = F.l1_loss(input, target, reduction='none')
+        weighted_loss = (loss * weight_mask).mean()
+
+        return weighted_loss
+
+        
+        
+    
+    

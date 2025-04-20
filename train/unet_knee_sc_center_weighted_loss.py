@@ -15,7 +15,9 @@ from fastmri.data.mri_data import fetch_dir
 from fastmri.data.subsample import create_mask_for_mask_type
 from fastmri.data.transforms import UnetDataTransform
 from fastmri.pl_modules import FastMriDataModule, UnetModule
+from fastmri.pl_modules import UnetModuleCenterWeighted
 
+#from unet_module_center_weighted import UnetModuleCenterWeighted
 
 def cli_main(args):
     pl.seed_everything(args.seed)
@@ -51,7 +53,7 @@ def cli_main(args):
     # ------------
     # model
     # ------------
-    model = UnetModule(
+    model = UnetModuleCenterWeighted(
         in_chans=args.in_chans,
         out_chans=args.out_chans,
         chans=args.chans,
@@ -83,7 +85,8 @@ def build_args():
     parser = ArgumentParser()
 
     # basic args
-    path_config = pathlib.Path("/content/drive/My Drive/fastMRI/fastmri_dirs.yaml")
+    #path_config = pathlib.Path("/content/drive/My Drive/fastMRI/fastmri_dirs.yaml")
+    path_config = pathlib.Path("/content/drive/MyDrive/CS7643/fastMRI/fastmri_dirs.yaml")
     backend = "cuda"
     num_gpus = 1
     batch_size = 1
@@ -91,7 +94,7 @@ def build_args():
     # set defaults based on optional directory config
     data_path = fetch_dir("knee_path", path_config)
     default_root_dir = (
-        fetch_dir("log_path", path_config) / "unet" / "knee_sc_leaderboard"
+        fetch_dir("log_path", path_config) / "unet" / "knee_sc_leaderboard_center_weighted_loss"
     )
 
     # client arguments

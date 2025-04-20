@@ -296,8 +296,12 @@ class SliceDataset(torch.utils.data.Dataset):
         # check if our dataset is in the cache
         # if there, use that metadata, if not, then regenerate the metadata
         if dataset_cache.get(root) is None or not use_dataset_cache:
-            files = list(Path(root).iterdir())
+            files = sorted([
+              f for f in Path(root).rglob("*.h5")
+              if f.is_file()
+            ])
             for fname in sorted(files):
+              try:
                 metadata, num_slices = self._retrieve_metadata(fname)
 
                 new_raw_samples = []
@@ -307,6 +311,8 @@ class SliceDataset(torch.utils.data.Dataset):
                         new_raw_samples.append(raw_sample)
 
                 self.raw_samples += new_raw_samples
+              except (OSError, ValueError) as e:
+                continue # Skip any corrupted file
 
             if dataset_cache.get(root) is None and use_dataset_cache:
                 dataset_cache[root] = self.raw_samples
