@@ -1,6 +1,8 @@
 # fastMRI Reconstruction with U-Net
 
-This project implements a baseline U-Net model for image reconstruction on the [fastMRI](https://github.com/facebookresearch/fastMRI) [single-coil knee dataset](https://fastmri.med.nyu.edu/). It serves as a starting point for analyzing how targeted loss weighting affects reconstruction image quality. 
+This project implements a baseline U-Net model for image reconstruction on the [fastMRI](https://github.com/facebookresearch/fastMRI) single-coil knee dataset. It serves as a starting point for analyzing how targeted loss weighting affects reconstruction image quality. 
+
+Dataset Link: https://fastmri.med.nyu.edu/
 
 ## Objective
 
