@@ -19,8 +19,12 @@ To explore whether emphasizing the central pixels in the reconstructed image imp
 ├── train/
 |   ├── fastMRI_knee_SC_baseline.ipynb: Training of baseline
 |   ├── fastMRI_knee_SC_center_weighted.ipynb: Training of model with weighted loss
+|   ├── fastMRI_knee_SC_AttUnet.ipynb: Training of Attention U-Net
 |   ├── unet_knee_sc.py: Training params for baseline model
-|   ├── unet_knee_sc_center_weighted_loss.py: Training params for weighted loss model
+|   ├── unet_knee_sc_center_weighted_loss.py: Training params for center-weighted loss model
+|   ├── unet_knee_sc_AttUnet.py: Training params for Attention U-Net
+├── evaluate/
+|   ├── evaluate_models.ipynb: 
 ├── fastMRI/
 │   ├── data/ (Data processing for fastMRI dataset)
 |   |── models/ (Model definitions)
@@ -28,3 +32,12 @@ To explore whether emphasizing the central pixels in the reconstructed image imp
 |   |── losses.py: Custom loss functions
 |   |── ... 
 ```
+
+## Training Models
+- Go to train folder
+- To tune hyperparameters for model training, select the corresponding python file
+- To train each model, select the corresponding Jupyter notebook file
+
+## Evaluating Models
+- Go to evaluate folder
+- Run evaluate_models.ipynb
