@@ -6,11 +6,12 @@ Dataset Link: https://fastmri.med.nyu.edu/
 
 ## Objective
 
-To explore whether emphasizing the central pixels in the reconstructed image improves the reconstruction quality and SSIM (Structural Similarity Index Measure) by modifying the loss function during training: 
-- Build a baseline U-Net model (Model 1)
-- Modify the baseline model's loss function to upweight L1 loss in central image regions during training (Model 2)
-- Build an Attention U-Net model (Model 3)
-- Compare reconstruction quality (SSIM and MSE) of these 3 models
+To explore whether targeted weighting loss function and architectural modifications improve the reconstruction quality measured by MSE, NMSE, PSNR, and SSIM scores by implementing these 3 models:
+1. Baseline U-Net model
+2. Baseline U-Net with center-weighted L1 loss function during training
+3. Attention U-Net with center-weighted L1 loss function during training
+
+Due to hidden ground-truth reconstruction images in the test set for the 2020 fastMRI challenge, we will use the untouched portion of the validation/held-out set as the surrogate test set for model evaluation. Note that we used a fixed seed to sample training and validation sets by volume. 
 
 ## Folder Structure
 ```
@@ -34,10 +35,17 @@ To explore whether emphasizing the central pixels in the reconstructed image imp
 ```
 
 ## Training Models
-- Go to train folder
+- Go to ~/train/
 - To tune hyperparameters for model training, select the corresponding python file
-- To train each model, select the corresponding Jupyter notebook file
+- To train each model, select the corresponding Jupyter notebook file (fix directory paths)
 
 ## Evaluating Models
-- Go to evaluate folder
-- Run evaluate_models.ipynb
+- Go to ~/evaluate/
+- Run evaluate_models.ipynb (fix directory paths) to generate output reconstruction images
+- To evaluate against target reconstruction images, go to ~/fastmri/ and run:
+  ```
+  python evaluate.py \
+  --target-path <TARGET_PATH>
+  --predictions-path <RECONSTRUCTION_PATH>
+  --challenge singlecoil
+  ```
