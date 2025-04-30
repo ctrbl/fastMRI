@@ -17,15 +17,20 @@ Due to hidden ground-truth reconstruction images in the test set for the 2020 fa
 ```
 ├── README.md
 ├── requirements.txt
+├── data/ (Download link: https://fastmri.med.nyu.edu/)
+|   ├── singlecoil_train/
+|   ├── singlecoil_val/
+|   ├── singlecoil_test/
 ├── train/
-|   ├── fastMRI_knee_SC_baseline.ipynb: Training of baseline
-|   ├── fastMRI_knee_SC_center_weighted.ipynb: Training of model with weighted loss
-|   ├── fastMRI_knee_SC_AttUnet.ipynb: Training of Attention U-Net
+|   ├── fastMRI_knee_SC_baseline.ipynb: Training of baseline model
+|   ├── fastMRI_knee_SC_center_weighted.ipynb: Training of center-weighted loss model
+|   ├── fastMRI_knee_SC_AttUnet_center_weighted.ipynb: Training of Attention U-Net
 |   ├── unet_knee_sc.py: Training params for baseline model
 |   ├── unet_knee_sc_center_weighted_loss.py: Training params for center-weighted loss model
 |   ├── unet_knee_sc_AttUnet.py: Training params for Attention U-Net
 ├── evaluate/
-|   ├── evaluate_models.ipynb: 
+|   ├── evaluate_models.ipynb: Evaluation script to generate reconstruction images
+|   ├── test_models.ipynb: Evaluate outputs against target and visualize reconstruction and error images
 ├── fastMRI/
 │   ├── data/ (Data processing for fastMRI dataset)
 |   |── models/ (Model definitions)
@@ -37,12 +42,14 @@ Due to hidden ground-truth reconstruction images in the test set for the 2020 fa
 ## Training Models
 - Go to ~/train/
 - To tune hyperparameters for model training, select the corresponding python file
-- To train each model, select the corresponding Jupyter notebook file (fix directory paths)
+- To train each model, select the corresponding Jupyter notebook file (fix data and log paths if needed)
 
 ## Evaluating Models
 - Go to ~/evaluate/
-- Run evaluate_models.ipynb (fix directory paths) to generate output reconstruction images
-- To evaluate against target reconstruction images, go to ~/fastmri/ and run:
+- To generate output reconstruction images, run evaluate_models.ipynb (fix data and log paths if needed)
+- To visualize target, output reconstructions, and error images, run test_models.ipynb
+
+- To simply get evaluation metrics of reconstruction images, go to ~/fastmri/ and run:
   ```
   python evaluate.py \
   --target-path <TARGET_PATH>

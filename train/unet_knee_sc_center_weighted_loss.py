@@ -85,8 +85,7 @@ def build_args():
     parser = ArgumentParser()
 
     # basic args
-    #path_config = pathlib.Path("/content/drive/My Drive/fastMRI/fastmri_dirs.yaml")
-    path_config = pathlib.Path("/content/drive/MyDrive/CS7643/fastMRI/fastmri_dirs.yaml")
+    path_config = pathlib.Path("/content/drive/My Drive/fastMRI/fastmri_dirs.yaml")
     backend = "cuda"
     num_gpus = 1
     batch_size = 1
