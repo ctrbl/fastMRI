@@ -58,5 +58,6 @@ Due to hidden ground-truth reconstruction images in the test set for the 2020 fa
   ```
 
 ## Model Training Logs & Checkpoints
+- Link to Box folder with all model checkpoints: https://gatech.box.com/s/cuvqdydm5lfwudielgebge1i9wnlu0nq
 - Go to ~/logs/unet/
 - Select a model leaderboard folder to view its training logs and latest checkpoint 
