@@ -56,3 +56,7 @@ Due to hidden ground-truth reconstruction images in the test set for the 2020 fa
   --predictions-path <RECONSTRUCTION_PATH>
   --challenge singlecoil
   ```
+
+## Model Training Logs & Checkpoints
+- Go to ~/logs/unet/
+- Select a model leaderboard folder to view its training logs and latest checkpoint 
